@@ -13,4 +13,7 @@
 * CoursesPage - controller view version of CoursesPage, with useState, useEffect, and props, no markup
     * This simplifies the component. The CoursesPage component is focused solely on state concerns. The markup is in the CourseList component, which doesn't have to worry about state.
 * CourseList - markup for CoursesPage, uses props and PropTypes
-* ManageCoursePage - example of using URL parameters
+* Forms
+    * ManageCoursePage - example of using URL parameters, form compoment with form handling and validation logic
+    * CourseForm - form compoment with form markup
+    * TextInput - custom form input component with form validation markup
