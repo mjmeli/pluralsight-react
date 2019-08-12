@@ -17,3 +17,10 @@
     * ManageCoursePage - example of using URL parameters, form compoment with form handling and validation logic
     * CourseForm - form compoment with form markup
     * TextInput - custom form input component with form validation markup
+* Flux
+    * appDispatcher - very simple dispatcher
+    * actions/*Actions - actions
+    * actions/actionTypes - constants defining action types
+    * stores/* - stores
+    * ManageCoursePage -> wiring up flux instead of API
+    * CoursesPage -> wiring up flux instead of API, with initialization by subscribing to Flux Actions, and cleanup on unmount

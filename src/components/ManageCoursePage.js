@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import CourseForm from './CourseForm';
-import * as courseApi from '../api/courseApi';
 import { toast } from 'react-toastify';
+import courseStore from '../stores/courseStore';
+import * as courseActions from '../actions/courseActions';
 
 const ManageCoursePage = props => {
     const [errors, setErrors] = useState({});
+    const [courses, setCourses] = useState(courseStore.getCourses());
     const [course, setCourse] = useState({
         id: null,
         slug: "",
@@ -14,12 +16,25 @@ const ManageCoursePage = props => {
     });
 
     useEffect(() => {
+        // Subscribe to store, so that when the course store changes, we re-render (via the onChange callback below)
+        courseStore.addChangeListener(onChange);
+        
         const slug = props.match.params.slug;   // pull slug from the route /course/:slug
-        if (slug) {
-            courseApi.getCourseBySlug(slug)
-                .then(_course => setCourse(_course));
+        
+        // If courses are not yet loaded, we must request them first. Otherwise, we can just load from store.
+        if (courses.length === 0) {
+            courseActions.loadCourses();
+        } else if (slug) {
+            setCourse(courseStore.getCourseBySlug(slug));
         }
-    }, [props.match.params.slug])  // Can't use an empty array because we are monitoring the slug value
+
+        // We want to cleanup the subscription on unmount, which we do by returning a callback function from useEffect
+        return () => courseStore.removeChangeListener(onChange);
+    }, [courses.length, props.match.params.slug])  // Can't use an empty array because we are monitoring the slug value
+
+    function onChange() {
+        setCourses(courseStore.getCourses());
+    }
 
     function handleChange(event) {  // could also destructure event by replacing event with { target }
         const updatedCourse = {
@@ -56,7 +71,7 @@ const ManageCoursePage = props => {
             return;
         }
 
-        courseApi.saveCourse(course)
+        courseActions.saveCourse(course)
             .then(() => {
                 props.history.push("/courses");
                 toast.success("Course saved!");
