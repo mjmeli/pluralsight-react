@@ -5,8 +5,11 @@
     * `webpack.config.*.js` - Webpack configuration files
     * `package.json` - includes Babel and ESLint configurations, and custom npm scripts
 * Entry Points
-    * `index.html`
-    * `index.js`
+    * `src/index.css/html` - root HTML and CSS template
+    * `src/index.js` - entry point, with `react-router`
+    * `src/components/App.js` - main app component, with routing
+* Misc. Examples
+    * `components/courses/CoursesPage.js` - class component
 
 ## Original README
 The original README that came with the starting files is below.

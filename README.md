@@ -1,12 +1,23 @@
 # Pluralsight React Courses
 This repository contains the source code for various Pluralsight courses on React.
 
-## ps-react-flux
+## Cory House's Courses
+The following two courses are by Cory House. The first is an introductory course, where Flux is used. The second is a follow-up course that's more advanced that uses Redux. Both courses create the same product, but implemented different.
+
+Key differences are (first vs second):
+* Flux vs. Redux
+* create-react-app vs. custom environment
+
+### ps-react-flux
 **Building Applications with React and Flux** by Cory House
+* Flux
+* create-react-app
 
-https://app.pluralsight.com/library/courses/react-flux-building-applications
+Link: https://app.pluralsight.com/library/courses/react-flux-building-applications
 
-## ps-react-redux
+### ps-react-redux
 **Building Applications with React and Redux** by Cory House
+* Redux
+* Custom environment
 
-https://app.pluralsight.com/library/courses/react-redux-react-router-es6/
+Link: https://app.pluralsight.com/library/courses/react-redux-react-router-es6/
