@@ -1,6 +1,12 @@
 # [Building Applications in React and Redux](https://app.pluralsight.com/library/courses/react-redux-react-router-es6/)
 
 ## Summary
+* Environment
+    * `webpack.config.*.js` - Webpack configuration files
+    * `package.json` - includes Babel and ESLint configurations, and custom npm scripts
+* Entry Points
+    * `index.html`
+    * `index.js`
 
 ## Original README
 The original README that came with the starting files is below.
