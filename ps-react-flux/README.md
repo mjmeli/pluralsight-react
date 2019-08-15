@@ -1,4 +1,4 @@
-# Building Applications with React and Flux
+# [Building Applications in React and Flux](https://app.pluralsight.com/library/courses/react-flux-building-applications)
 
 ## How to use
 `npm start`
