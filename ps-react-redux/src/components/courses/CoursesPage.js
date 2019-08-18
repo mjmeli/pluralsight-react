@@ -1,45 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as courseActions from '../../redux/actions/courseActions';
+import * as authorActions from '../../redux/actions/authorActions';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
+import CourseList from './CourseList';
 
 class CoursesPage extends React.Component {
-    state = {
-        course: {
-            title: ''
+    componentDidMount() {
+        const { courses, authors, actions } = this.props;
+
+        // When we first load this component, make sure we have loaded the courses from the API
+        if (courses.length === 0) {
+            actions.loadCourses()
+                .catch(error => {
+                    alert('Loading courses failed ' + error);
+                });
         }
-    };
 
-    // Use arrow function with a class field to avoid problems of the this keyword
-    handleChange = event => {
-        const course = { ...this.state.course, title: event.target.value };
-        this.setState({ course: course });
-    };
-
-    handleSubmit = event => {
-        event.preventDefault();
-
-        // Dispatch a course creation action. createCourse is mapped via mapDispatchToProps.
-        this.props.actions.createCourse(this.state.course);
-    };
+        // When we first load this component, make sure we have loaded the authors from the API
+        if (authors.length === 0) {
+            actions.loadAuthors()
+                .catch(error => {
+                    alert('Loading authors failed ' + error);
+                });
+        }
+    }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <>
                 <h2>Courses</h2>
-                <h3>Add Course</h3>
-                <input
-                    type="text"
-                    onChange={this.handleChange}
-                    value={this.state.course.title}
-                />
-                <input type="submit" value="Save" />
-
-                { this.props.courses.map(course => (
-                    <div key={course.title}>{course.title}</div>
-                ))}
-            </form>
+                <CourseList courses={this.props.courses} />
+            </>
         );
     }
 }
@@ -47,15 +40,28 @@ class CoursesPage extends React.Component {
 // Prop types for this component, including the Redux props
 CoursesPage.propTypes = {
     courses: PropTypes.array.isRequired,
+    authors: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 };
 
 // Determines what state is passed to our component via props.
 // Be specific - we should only return what we need, as the component re-renders when state we pass changes
+// NOTE: the names on state are the "keys" we give combineReducers in the root reducer
 // NOTE: we are omitting ownProps as we don't need it, but I have left for visibility
 function mapStateToProps(state/*, ownProps*/) {
     return {
-        courses: state.courses
+        // Join author names into the list of courses
+        // Note we must check the authors have been loaded first
+        courses:
+            state.authors.length === 0
+                ? []
+                : state.courses.map(course => {
+                return {
+                    ...course,
+                    authorName: state.authors.find(author => author.id === course.authorId).name
+                };
+            }),
+        authors: state.authors
     };
 }
 
@@ -92,7 +98,11 @@ const mapDispatchToProps = {
 // We'll use #3 w/ bindActionCreators above so we don't have to update this function when we add more functions
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(courseActions, dispatch)
+        actions: { 
+            // Can pass single functions to bindActionCreators
+            loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
+            loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch)
+        }
     };
 }
 

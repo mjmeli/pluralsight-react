@@ -20,8 +20,11 @@
     * `src/redux/actions/courseActions.js` - course related action creators
     * `src/redux/reducers/index.js` - root reducer using `combineReducer`
     * `src/redux/reducers/courseReducer.js` - reducer for course actions
+    * `src/redux/reducers/initialState.js` - optional file that helps set default state values, and which improves clarity by showing the shape of the store
     * `src/index.js` - entry point configured to instantiate the Redux store
-    * `src/components/courses/CoursesPage.js` - component connected to Redux store using `connect` that dispatches actions, with PropTypes for state and dispatcher
+    * `src/components/courses/CoursesPage.js` - container component connected to Redux store using `connect` that dispatches actions, with PropTypes for state and dispatcher
+* Redux Thunks
+    * `src/redux/configureStore.js`- setup the store to use `redux-thunk` for async handling
 * Misc. Examples
     * `src/components/courses/CoursesPage.js` - class component
     * `src/redux/reducers/courseReducer.js` - default parameter value syntax

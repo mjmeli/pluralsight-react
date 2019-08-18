@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './reducers';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+import thunk from 'redux-thunk';
 
 export default function configureStore(initialState) {
     // This below is all it takes to configure the state, but we will add some middleware.
@@ -11,9 +12,10 @@ export default function configureStore(initialState) {
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
     // We would also like to add redux-immutable-state-invariant, which will warn us if we accidentally mutate Redux state.
+    // We also add redux-thunk which helps us handle async
     return createStore(
         rootReducer,
         initialState,
-        composeEnhancers(applyMiddleware(reduxImmutableStateInvariant()))
+        composeEnhancers(applyMiddleware(thunk, reduxImmutableStateInvariant()))
     );
 }
