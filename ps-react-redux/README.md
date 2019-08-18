@@ -27,6 +27,7 @@
     * `src/redux/configureStore.js`- setup the store to use `redux-thunk` for async handling
 * Misc. Examples
     * `src/components/courses/CoursesPage.js` - class component
+    * `src/components/courses/ManageCoursePage.js` - function component/hook
     * `src/redux/reducers/courseReducer.js` - default parameter value syntax
 
 ## Original README
