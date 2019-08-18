@@ -5,6 +5,8 @@ import * as authorActions from '../../redux/actions/authorActions';
 import PropTypes from 'prop-types';
 import CourseForm from './CourseForm';
 import { newCourse } from '../../../tools/mockData';
+import Spinner from '../common/Spinner';
+import { toast } from 'react-toastify';
 
 // Destructure props on the arguments here
 function ManageCoursePage({
@@ -20,6 +22,7 @@ function ManageCoursePage({
     // `course` on props is the newCourse defined in the mockData
     const [ course, setCourse ] = useState({...props.course});
     const [ errors, setErrors ] = useState({});
+    const [ saving, setSaving ] = useState(false);
 
     useEffect(() => {
         // When we first load this component, make sure we have loaded the courses into Redux from the API
@@ -51,25 +54,55 @@ function ManageCoursePage({
         }));
     }
 
+    // Client-side form validation
+    function formIsValid() {
+        const { title, authorId, category } = course;
+        const errors = {};
+
+        if (!title) errors.title = 'Title is required.';
+        if (!authorId) errors.author = 'Author is required.';
+        if (!category) errors.category = 'Category is required.';
+
+        setErrors(errors);
+
+        // Form is valid if the errors object still has no properties
+        return Object.keys(errors).length == 0;
+    }
+
     // Centralized save/create handler
     function handleSave(event) {
         // Keep page from posting back
         event.preventDefault();
 
+        // Client-side validation
+        if (!formIsValid())
+            return;
+
+        setSaving(true);
         saveCourse(course)
             .then(() => {
-                history.push('/courses')
+                toast.success('Course saved.');
+                history.push('/courses') // don't need to setSaving = false as we redirect to another page
+            })
+            .catch(error => {
+                setSaving(false);
+                setErrors({ onSave: error.message });
             });
     }
 
     return (
-        <CourseForm
-            course={course}
-            errors={errors}
-            authors={authors}
-            onChange={handleChange}
-            onSave={handleSave}
-        />
+        authors.length === 0 || courses.length === 0
+            ? (<Spinner />)
+            : (
+                <CourseForm
+                    course={course}
+                    errors={errors}
+                    authors={authors}
+                    onChange={handleChange}
+                    onSave={handleSave}
+                    saving={saving}
+                />
+            )
     );
 }
 

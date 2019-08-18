@@ -25,8 +25,10 @@
     * `src/components/courses/CoursesPage.js` - container component connected to Redux store using `connect` that dispatches actions, with PropTypes for state and dispatcher
 * Redux Thunks
     * `src/redux/configureStore.js`- setup the store to use `redux-thunk` for async handling
+    * `src/components/courses/ManageCoursePage.js` - component using async calls
+    * `src/redux/reducers/apiStatusActions.js` and `src/redux/reducers/apiStatusReducer.js` - setup async progress status with spinner
 * Misc. Examples
-    * `src/components/courses/CoursesPage.js` - class component
+    * `src/components/courses/CoursesPage.js` - class component; async/await instead of promises
     * `src/components/courses/ManageCoursePage.js` - function component/hook
     * `src/redux/reducers/courseReducer.js` - default parameter value syntax
 
