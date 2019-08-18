@@ -30,6 +30,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "src/index.html", // Where our HTML template is
             favicon: "src/favicon.ico"  // Where our favicon is
+        }),
+        // This plugin is for setting environment variables
+        new webpack.DefinePlugin({
+            "process.env.API_URL": JSON.stringify("http://localhost:3001")
         })
     ],
     module: {

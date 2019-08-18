@@ -4,6 +4,13 @@
 * Environment
     * `webpack.config.*.js` - Webpack configuration files
     * `package.json` - includes Babel and ESLint configurations, and custom npm scripts
+* Mock API
+    * `tools/apiServer.js` - Express.js server
+    * `tools/mockData.js` - seed data for API DB
+    * `tools/createMockDb.js` - script that regenerates our DB from the seed data
+    * `src/api/*` - API wrapper library
+    * `webpack.config.dev.js` - Configure environment variable to point to mock API
+    * `package.json` - scripts to start running the server
 * Entry Points
     * `src/index.css/html` - root HTML and CSS template
     * `src/index.js` - entry point, with `react-router`
