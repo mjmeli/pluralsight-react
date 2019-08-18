@@ -8,8 +8,16 @@
     * `src/index.css/html` - root HTML and CSS template
     * `src/index.js` - entry point, with `react-router`
     * `src/components/App.js` - main app component, with routing
+* Redux
+    * `src/redux/configureStore.js`- creates the single global store with `createStore`
+    * `src/redux/actions/courseActions.js` - course related action creators
+    * `src/redux/reducers/index.js` - root reducer using `combineReducer`
+    * `src/redux/reducers/courseReducer.js` - reducer for course actions
+    * `src/index.js` - entry point configured to instantiate the Redux store
+    * `src/components/courses/CoursesPage.js` - component connected to Redux store using `connect` that dispatches actions, with PropTypes for state and dispatcher
 * Misc. Examples
-    * `components/courses/CoursesPage.js` - class component
+    * `src/components/courses/CoursesPage.js` - class component
+    * `src/redux/reducers/courseReducer.js` - default parameter value syntax
 
 ## Original README
 The original README that came with the starting files is below.
