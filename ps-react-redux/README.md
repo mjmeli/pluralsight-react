@@ -27,14 +27,20 @@
     * `src/redux/configureStore.js`- setup the store to use `redux-thunk` for async handling
     * `src/components/courses/ManageCoursePage.js` - component using async calls
     * `src/redux/reducers/apiStatusActions.js` and `src/redux/reducers/apiStatusReducer.js` - setup async progress status with spinner
-* Testing
+* Testing General
     * `package.json` - setup to run tests with `jest` and `enzyme`
     * `tools/fileMock.js`, `tools/styleMock.js` - mocks file and CSS imports for `jest`
     * `tools/testSetup.js` - configuration of `enzyme` adapter
+* React Testing
     * `src/components/courses/tests/CourseForm.Snapshots.test.js` - example snapshot tests
     * `src/components/courses/tests/CourseForm.Enzyme.test.js` - example tests with `enzyme` shallow rendering
     * `src/components/common/tests/Header.Enzyme.test.js` - example tests with `enzyme` mount rendering compared to shallow rendering
     * `src/components/common/tests/CourseForm.ReactTestingLibrary.test.js` - example tests with React Testing Library
+* Redux Testing
+    * `src/components/courses/tests/ManageCoursePage.test.js` - testing connect React component
+    * `src/redux/actions/tests/courseActions.test.js` - unit testing action creators and thunks with mocking
+    * `src/redux/reducers/tests/courseReducer.test.js` - unit testing reducers
+    * `src/redux/tests/store.test.js` - integration testing the Redux store
 * Misc. Examples
     * `src/components/courses/CoursesPage.js` - class component; async/await instead of promises
     * `src/components/courses/ManageCoursePage.js` - function component/hook

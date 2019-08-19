@@ -9,7 +9,8 @@ import Spinner from '../common/Spinner';
 import { toast } from 'react-toastify';
 
 // Destructure props on the arguments here
-function ManageCoursePage({
+// Also export the unconnected component so we can test this component directly
+export function ManageCoursePage({
     courses,
     authors,
     loadCourses,
