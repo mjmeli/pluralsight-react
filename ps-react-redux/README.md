@@ -2,8 +2,11 @@
 
 ## Summary
 * Environment
-    * `webpack.config.*.js` - Webpack configuration files
+    * `webpack.config.(dev|prod).js` - Webpack configuration files
     * `package.json` - includes Babel and ESLint configurations, and custom npm scripts
+        * scripts to start up mock API and the dev server
+        * scripts to run tests
+        * scripts to run production build, with testing and linting, and start up a web server with production bundle
 * Mock API
     * `tools/apiServer.js` - Express.js server
     * `tools/mockData.js` - seed data for API DB
@@ -16,7 +19,7 @@
     * `src/index.js` - entry point, with `react-router`
     * `src/components/App.js` - main app component, with routing
 * Redux
-    * `src/redux/configureStore.js`- creates the single global store with `createStore`
+    * `src/redux/configureStore.js` + `src/redux/configureStore.(dev|prod).js` - creates the single global store with `createStore` with middleware depending on environment
     * `src/redux/actions/courseActions.js` - course related action creators
     * `src/redux/reducers/index.js` - root reducer using `combineReducer`
     * `src/redux/reducers/courseReducer.js` - reducer for course actions
@@ -24,7 +27,7 @@
     * `src/index.js` - entry point configured to instantiate the Redux store
     * `src/components/courses/CoursesPage.js` - container component connected to Redux store using `connect` that dispatches actions, with PropTypes for state and dispatcher
 * Redux Thunks
-    * `src/redux/configureStore.js`- setup the store to use `redux-thunk` for async handling
+    * `src/redux/configureStore.js` + `src/redux/configureStore.(dev|prod).js` - setup the store to use `redux-thunk` for async handling
     * `src/components/courses/ManageCoursePage.js` - component using async calls
     * `src/redux/reducers/apiStatusActions.js` and `src/redux/reducers/apiStatusReducer.js` - setup async progress status with spinner
 * Testing General

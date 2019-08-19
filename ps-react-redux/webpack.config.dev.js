@@ -8,7 +8,7 @@ process.env.NODE_ENV = 'development';
 module.exports = {
     mode: 'development',    // So webpack knows to run in development mode, setting Node environment to development
     target: 'web',          // Alternative e.g. node
-    devtool: 'cheap-module-source-map',  // to get a source map for debugging in the browser, even though we transpile
+    devtool: 'cheap-module-source-map',  // to get a source map for debugging in the browser, even though we transpile. cheap-module-source-map is recommended for development.
     entry: './src/index',   // App entry point
     // Note: Webpack doesn't output anything in development (it does it from memory)
     output: {
@@ -27,13 +27,15 @@ module.exports = {
         https: false
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: "src/index.html", // Where our HTML template is
-            favicon: "src/favicon.ico"  // Where our favicon is
-        }),
         // This plugin is for setting environment variables
         new webpack.DefinePlugin({
             "process.env.API_URL": JSON.stringify("http://localhost:3001")
+        }),
+        // This plugin performs a number of functions, like generating the index.html and adds a reference to the JS and CSS bundles into the HTML for us.
+        // This is handy because the JS and CSS file names will change over time.
+        new HtmlWebpackPlugin({
+            template: "src/index.html", // Where our HTML template is
+            favicon: "src/favicon.ico"  // Where our favicon is
         })
     ],
     module: {
